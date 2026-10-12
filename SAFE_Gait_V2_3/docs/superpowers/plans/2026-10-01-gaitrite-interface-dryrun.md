@@ -1,0 +1,17 @@
+# GAITRite interface and limited dry run
+
+Authority: user explicitly requests the64channel frontend, synchronization/reference checks and2–3subject training/inference dry run. No full training and no change to four downstream algorithms. Native execution in this session; no Git repository. Original artifacts guarded by hashes.
+
+Design: canonical within-GAITRite channel orderL0..31,R0..31; complete released clips only, no reference-based crop, shift, resampling or features. Temporal mean pooling factor4,log1p and subject-balanced training-only channel standardization preserve all64pressure channels. Existing PopulationTCN(in_channels=64,n_targets=3,hidden=32,dropout=.1), unchanged source, learns its ordinary input convolution; no arbitrary64→32raw compression and no reuse of32channelWearGait checkpoints. Targets remain velocity(cm/s),step_length(cm),step_time(s); reference loader is separate from pressure frontend.
+
+Pilot subjects selected before outcomes:P1,P7,P9, covering normal data and knownreference exceptions. All three conditions enter technical loading checks. For limited training, useP1/P7 asdevelopment andP9 asheld-out;3epochs only, no epoch/model selection, seed7. One final development model and2leave-one-development-subject-out models produce a small interface-onlyOOF sample. Any downstream smoke checks use only these trainingOOF priors and unchangedfunctions; never interpret tiny-sample outputs as performance evidence. P9query labels are opened only after predictions and support corrections are fixed. Pilot subjects must be flagged as technical-development exposure for any later confirmation protocol.
+
+Sync audit: check uniqueGait_Id/subject/condition and source/reference contact geometry. Evaluate supplied offsets as t_sensor=t_GAITRite+offset at64Hz. Compare pressure-only unsupervised contact proxies with reference for diagnosis only; report actual errors and sign/side alternatives, never optimizeoffsets or shift/crop modelinputs usingquerylabels. Metadatafit agreement cannot substitute independentclock validation. Sourceclip segmentation provenance remains an explicit boundary.
+
+- [x] Add failing tests for64channel completeness/order,padding,fit-subject isolation,reference-free featureloading andtargetdefinition/truncatedfirstevent.
+- [x] Implement separatefrontend/reference loaders; run targetedtests and unchangedTCN checks.
+- [x] Audit synchronization on93pilotpasses,saveperfoot/percontactmetrics andfixedexampleplots; confirmtarget/passassociation andunits.
+- [x] Run3shortmodels on2development+1heldoutsubjects,savecheckpoints/provenance/predictions; verifycounterfactualquerylabelindependence andsupport/querydisjointness.
+- [x] Independentreview,sourcehashverificationandfinalreadinessreport. Fulltrainingremainsunstarted; report unresolvedsource-levelsynchronization/segmentationlimits candidly.
+
+Completion amendments: downstream covariance fit correctly rejects2training subjects; no corrections/comparison were generated and no guard was relaxed. Initial metadata eagerly included unused target columns; claims corrected with original record retained and fresh pressure-only saved-model replay verified, no retraining. Read-only sync audit expanded to664passes after findingP12_SP_7 bilateraloffsetdifference1.578125s; uniquecyclealignment remains unresolved. P19contactproxy failures reflecthighswingbaseline, notprovenlabelerror. Formal launch deferred. See reports/gaitrite_interface_dryrun_20261001/INTERFACE_REPORT.md.

@@ -1,0 +1,4 @@
+seed: 7
+# Set to "cuda" in PyCharm after installing a CUDA-enabled PyTorch build.
+# Leave null to auto-detect CUDA and otherwise fall back to CPU.
+device: null

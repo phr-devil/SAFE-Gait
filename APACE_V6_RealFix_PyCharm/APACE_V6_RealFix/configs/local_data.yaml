@@ -1,0 +1,4 @@
+# Relative paths are resolved from THIS config file, independent of the terminal.
+weargait: ../../../1.WearGait-PD
+gaitrite: ../../../insole-gaitrite-dataset
+optitrack: ../../../InsolesOpitrackDataset/InsolesOpitrackDataset

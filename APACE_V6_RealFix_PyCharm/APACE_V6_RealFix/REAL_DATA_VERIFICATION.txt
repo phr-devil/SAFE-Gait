@@ -1,0 +1,11 @@
+APACE-V6 real-data repair verification (2026-09-24)
+Software unit tests: 34 passed, 0 failed.
+Real input: canonical WearGait CSVs HC100/HC101/HC102/NLS036.
+Converter selected 6 raw files; HC100 lack the 32 individual pressure channels and are excluded (check conversion_audit.json).
+Real G0: 20/20 valid pass-level examples; 3 subjects (HC101=4, HC102=8, NLS036=8).
+Distinct subject sets: train=HC102; validation=HC101; test=NLS036.
+Real stages A/B/C/D/E: COMPLETED. Pilot status: PILOT_ONLY.
+Pilot validation one-shot gain on 1 subject: negative (-0.0286); cannot establish calibration improvement.
+Held-out NLS036 learned policy selected STOP at 0 references; normalized MAE did not improve.
+This is an integration test ONLY, not a verified research finding.
+G1/G2 subject-level formal research halting is implemented; G3/headroom/full LOSO and cross-dataset replication are not automated in this release.

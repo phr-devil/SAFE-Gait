@@ -1,0 +1,43 @@
+WearGait-PD real-file validation: NLS036
+=====================================
+
+Files checked:
+- NLS036_SelfPace.csv
+- NLS036_HurriedPace.csv
+- PKMAS Walkway Gait Metrics - HP+SP.csv
+
+Observed format:
+- 347 columns in both task CSVs
+- Complete 32-channel Moticon plantar pressure input:
+  LPressure1..LPressure16 + RPressure1..RPressure16
+- Median sampling interval: 0.01 s (~100 Hz)
+- Four independent GeneralEvent==Walk runs in SelfPace
+- Four independent GeneralEvent==Walk runs in HurriedPace
+
+Walk-pass pressure completeness:
+SelfPace: pass completeness 99.1%, 100%, 100%, 100%
+HurriedPace: pass completeness 99.5%, 99.3%, 98.3%, 99.8%
+
+Pass-level Zeno reference reconstruction
+----------------------------------------
+Pass-level references were reconstructed from raw Walkway_X/Y/PressureLevel/Foot.
+Aggregate reconstructed values were compared with the official PKMAS task summary.
+
+SelfPace:
+metric                 reconstructed    PKMAS       relative difference
+velocity_cm_s          92.0789          92.110      0.034%
+step_length_cm         56.5007          56.829      0.578%
+stride_length_cm       112.8505         112.411     0.391%
+step_time_s            0.6141           0.612       0.337%
+stride_time_s          1.2191           1.220       0.073%
+
+HurriedPace:
+metric                 reconstructed    PKMAS       relative difference
+velocity_cm_s          117.0899         116.997     0.079%
+step_length_cm         66.0560          66.540      0.727%
+stride_length_cm       132.4344         131.837     0.453%
+step_time_s            0.5645           0.562       0.445%
+stride_time_s          1.1254           1.127       0.144%
+
+Conclusion:
+The raw WearGait-PD CSV files support true pass-level reference generation closely matching the official PKMAS summary (<0.8% relative difference for all five checked metrics on NLS036). This makes sequential APACE QUERY/STOP episodes technically feasible without using task-level aggregate labels as if they were pass labels.

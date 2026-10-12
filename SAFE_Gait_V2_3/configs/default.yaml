@@ -1,0 +1,28 @@
+project: SAFE-Gait-V2.3
+seed: 7
+conditions: [SP, HP]
+primary_targets: [velocity, step_length, step_time]
+secondary_targets: [stride_length, stride_time]
+residual_model:
+  covariance_shrinkage: 0.20
+  min_eigenvalue: 1.0e-5
+  min_transfer_correlation: 0.0
+  min_repeated_subjects: auto_max_3_or_targets_plus_1
+  targetwise_shared_variance_cap: true
+  coherent_shared_covariance_constraint: true
+  fit_source: matched_cross_fitted_training_residuals_only
+personalization:
+  support_trials: 1
+  primary_support_selection: first
+  query_metric_aggregation: passwise_then_subject
+  use_validation_damping: false
+  damping_scope: condition_pair_x_target
+validation:
+  outer_folds: 5
+  seeds: [7, 17, 27]
+  bootstrap_unit: subject
+  bootstrap_replicates: 2000
+  report_pairs: [SP_to_SP, HP_to_HP, SP_to_HP, HP_to_SP]
+safety:
+  report_raw_negative_transfer: true
+  report_repeatability_aware_harm: true

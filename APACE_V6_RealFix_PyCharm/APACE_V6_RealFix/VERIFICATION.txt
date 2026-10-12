@@ -1,0 +1,23 @@
+APACE-V6 verification
+Date: 2026-09-12
+
+Commands executed:
+1. pytest -q
+   Result: 25 passed in 5.53s
+
+2. python run_demo.py --config configs/default.yaml --quick --output outputs/final_verify
+   Result:
+   base_mae: 0.11300544068217278
+   calibrated_mae: 0.08063658885657787
+   mean_references: 2.0
+   relative_improvement: 0.2969462598675689
+   guard_status: GO
+   device: cpu
+   n_train_subjects: 7
+   n_test_subjects: 2
+   n_value_records: 63
+
+3. python -m compileall -q apace run_demo.py
+   Result: exit code 0
+
+Important: these synthetic metrics verify code-path behavior only. They are not scientific performance claims.

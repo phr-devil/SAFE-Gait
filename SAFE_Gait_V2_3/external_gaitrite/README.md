@@ -1,0 +1,11 @@
+# GAITRite pressure frontend
+
+This dataset-specific interface retains all64 valid pressure channels in fixed order L PressureSensor0..31 then R PressureSensor0..31. It is separate from the frozen SAFE-Gait algorithms. It does not reuse WearGait's sensor layout or32-channel checkpoint.
+
+`read_pressure` reads only bilateral pressure CSVs. `GaitRiteFrontend` temporally averages groups of4 samples (including the final partial group), applies log1p, and fits subject-balanced per-channel normalization on designated training subjects. It returns float32[B,64,T] and a right-prefix Boolean mask. At nominal64Hz, full pooled blocks span62.5ms. It neither reads nor applies synchronization offsets, event times, reference-based crops, or target metadata. The existing `PopulationTCN(in_channels=64,n_targets=3,hidden=32,dropout=.1)` accepts this input without source changes. Its first learned convolution operates on every pressure channel.
+
+`read_reference` is a separate label loader. For chronological footfalls, exclude the first available event because its predecessor is outside the bounded reference, including the positive leading step in P7_FP_1. Define velocity=sum(complete step lengths)/sum(complete step times) in cm/s; step_length=mean complete step length in cm; step_time=mean complete step time in seconds. These are whole-pass heel-based targets, not frame labels or stride velocity. Reject inconsistent identity, events, contact times or geometry. This loader is scoped to the positive-step, straight walking data in this release; negative/backward steps would require a separately declared protocol.
+
+Keep the released physical clips intact. A clip may contain approach/departure pressure contacts absent from the walkway reference. This frontend does not claim to detect boundaries from a continuous recording. Subject/condition/pass identity must come from the validated external manifest, with disjoint physical support/query passes. Do not load reference target columns into prediction metadata; read only needed columns.
+
+Pilot artifacts and limitations: `../reports/gaitrite_interface_dryrun_20261001/INTERFACE_REPORT.md`. Only3 technical models of3epochs were run. Full external replication remains unstarted. P1/P7/P9 are exposed technical-development subjects; do not label them untouched confirmatory test subjects.
